@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using course_tracker.Data;
+using course_tracker.Repositories;
 
 namespace course_tracker
 {
@@ -22,6 +23,8 @@ namespace course_tracker
         {
             services.AddDbContext<CourseTrackerContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
             services.AddControllers();
+
+            services.AddScoped<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
