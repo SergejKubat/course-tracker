@@ -1,11 +1,15 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace course_tracker.Models
 {
     public class Review
     {
         public int Id { get; set; }
+        [Required]
+        [MaxLength(250)]
         public string Comment { get; set; }
+        [Required]
         public int Rating { get; set; }
         public DateTime DateCreated { get; set; }
 

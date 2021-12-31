@@ -20,7 +20,7 @@ namespace course_tracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<UserContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<CourseTrackerContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
             services.AddControllers();
         }
 
