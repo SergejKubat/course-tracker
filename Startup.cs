@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using course_tracker.Data;
 using course_tracker.Repositories;
+using course_tracker.Helpers;
 
 namespace course_tracker
 {
@@ -21,10 +22,14 @@ namespace course_tracker
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<CourseTrackerContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
+
             services.AddControllers();
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<JwtService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,6 +43,13 @@ namespace course_tracker
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(options => options
+                .WithOrigins(new[] { "http://localhost:3000", "http://localhost:8080", "http://localhost:4200" })
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials()
+            );
 
             app.UseAuthorization();
 

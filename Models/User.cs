@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace course_tracker.Models
 {
@@ -23,6 +24,7 @@ namespace course_tracker.Models
         public DateTime DateCreated { get; set; }
         [Required]
         [MaxLength(200)]
+        [JsonIgnore]
         public string Password { get; set; }
         [Required]
         public bool Enabled { get; set; }
