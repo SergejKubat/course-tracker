@@ -25,6 +25,13 @@ namespace course_tracker.Controllers
         [HttpPost("register")]
         public IActionResult Register(RegisterDto dto)
         {
+            var userExists = _repository.GetByEmail(dto.Email);
+
+            if (userExists != null)
+            {
+                return BadRequest(new { message = "Email already exists" });
+            }
+
             var user = new User
             {
                 FirstName = dto.FirstName,
