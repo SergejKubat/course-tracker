@@ -29,7 +29,7 @@ namespace course_tracker.Controllers
 
             if (userExists != null)
             {
-                return BadRequest(new { message = "Email already exists" });
+                return BadRequest(new { message = "User with specified email already exists" });
             }
 
             var user = new User

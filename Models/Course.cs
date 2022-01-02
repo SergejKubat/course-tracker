@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace course_tracker.Models
 {
@@ -28,9 +29,11 @@ namespace course_tracker.Models
         public bool Public { get; set; }
 
         public int UserId { get; set; }
+        [JsonIgnore]
         public User User { get; set; }
 
         public int CategoryId { get; set; }
+        [JsonIgnore]
         public Category Category { get; set; }
 
         public List<Section> Sections { get; set; } = new List<Section>();

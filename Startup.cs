@@ -29,6 +29,13 @@ namespace course_tracker
             services.AddControllers();
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRoleRepository, RoleRepository>();
+            services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IReviewRepository, ReviewRepository>();
+            services.AddScoped<IPurchaseRecordRepository, PurchaseRecordRepository>();
+            services.AddScoped<ISectionRepository, SectionRepository>();
+            services.AddScoped<ILectionRepository, LectionRepository>();
             services.AddScoped<JwtService>();
         }
 

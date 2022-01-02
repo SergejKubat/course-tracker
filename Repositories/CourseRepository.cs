@@ -29,6 +29,11 @@ namespace course_tracker.Repositories
             return _context.Courses.FirstOrDefault(c => c.Id == id);
         }
 
+        public Course GetByName(string name)
+        {
+            return _context.Courses.FirstOrDefault(c => c.Name == name);
+        }
+
         public List<Course> GetAllByUserId(int id)
         {
             return _context.Courses.Where(c => c.UserId == id).ToList();

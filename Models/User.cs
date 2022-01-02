@@ -30,6 +30,7 @@ namespace course_tracker.Models
         public bool Enabled { get; set; }
 
         public int RoleId { get; set; }
+        [JsonIgnore]
         public Role Role { get; set; }
 
         public List<Course> Courses { get; set; } = new List<Course>();
