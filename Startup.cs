@@ -47,8 +47,6 @@ namespace course_tracker
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
 
             app.UseCors(options => options

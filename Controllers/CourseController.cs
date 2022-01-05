@@ -94,7 +94,7 @@ namespace course_tracker.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCourses([FromQuery(Name = "userId")] string userId, [FromQuery(Name = "categoryId")] string categoryId)
+        public IActionResult GetCourses([FromQuery(Name = "userId")] string userId, [FromQuery(Name = "categoryId")] string categoryId, [FromQuery(Name = "query")] string query)
         {
             if (userId != null)
             {
@@ -106,7 +106,12 @@ namespace course_tracker.Controllers
                 return Ok(_repository.GetAllByCategoryId(int.Parse(categoryId)));
             }
 
-            return Ok(new { message = "user id: " + userId + ", category id: " + categoryId });
+            if (query != null)
+            {
+                return Ok(_repository.GetAllByName(query));
+            }
+
+            return Ok(new { message = "No courses found" });
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace course_tracker.Models
 {
@@ -10,6 +11,7 @@ namespace course_tracker.Models
         [MaxLength(50)]
         public string Name { get; set; }
 
+        [JsonIgnore]
         public List<Course> Courses { get; set; } = new List<Course>();
     }
 }

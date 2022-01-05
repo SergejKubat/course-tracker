@@ -9,5 +9,6 @@ namespace course_tracker.Repositories
         PurchaseRecord GetById(int id);
         List<PurchaseRecord> GetByUserId(int id);
         List<PurchaseRecord> GetByCourseId(int id);
+        PurchaseRecord GetByUserAndCourseId(int userId, int courseId);
     }
 }

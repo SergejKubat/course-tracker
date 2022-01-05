@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using course_tracker.Data;
+using course_tracker.Dtos;
 using course_tracker.Models;
 
 namespace course_tracker.Repositories
@@ -28,12 +29,12 @@ namespace course_tracker.Repositories
             return _context.Reviews.FirstOrDefault(r => r.Id == id);
         }
 
-        public Review Update(int id, Review review)
+        public Review Update(int id, ReviewDto dto)
         {
             var newReview = this.GetById(id);
 
-            newReview.Comment = review.Comment;
-            newReview.Rating = review.Rating;
+            newReview.Comment = dto.Comment;
+            newReview.Rating = dto.Rating;
             newReview.DateCreated = DateTime.Now;
 
             _context.SaveChanges();
@@ -57,6 +58,11 @@ namespace course_tracker.Repositories
         public List<Review> GetByCourseId(int id)
         {
             return _context.Reviews.Where(r => r.CourseId == id).ToList();
+        }
+
+        public Review GetByUserAndCourseId(int userId, int courseId)
+        {
+            return _context.Reviews.FirstOrDefault(r => r.UserId == userId && r.CourseId == courseId);
         }
     }
 }

@@ -38,5 +38,10 @@ namespace course_tracker.Repositories
             return _context.PurchaseRecords.Where(pr => pr.CourseId == id).ToList();
         }
 
+        public PurchaseRecord GetByUserAndCourseId(int userId, int courseId)
+        {
+            return _context.PurchaseRecords.FirstOrDefault(pr => pr.UserId == userId && pr.CourseId == courseId);
+        }
+
     }
 }
