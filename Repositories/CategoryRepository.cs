@@ -14,6 +14,14 @@ namespace course_tracker.Repositories
             _context = context;
         }
 
+        public Category Create(Category category)
+        {
+            _context.Categories.Add(category);
+            category.Id = _context.SaveChanges();
+
+            return category;
+        }
+
         public Category GetById(int id)
         {
             return _context.Categories.FirstOrDefault(c => c.Id == id);

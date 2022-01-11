@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using course_tracker.Data;
+using course_tracker.Dtos;
 using course_tracker.Models;
 
 namespace course_tracker.Repositories
@@ -26,6 +27,19 @@ namespace course_tracker.Repositories
         public Lection GetById(int id)
         {
             return _context.Lections.FirstOrDefault(l => l.Id == id);
+        }
+
+        public Lection Update(int id, LectionDto dto)
+        {
+            var newLection = this.GetById(id);
+
+            newLection.Name = dto.Name;
+            newLection.Description = dto.Description;
+            newLection.Video = dto.Video;
+
+            _context.SaveChanges();
+
+            return newLection;
         }
 
         public void Delete(int id)

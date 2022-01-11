@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace course_tracker.Models
 {
@@ -16,6 +17,7 @@ namespace course_tracker.Models
         public string Video { get; set; }
 
         public int SectionId { get; set; }
+        [JsonIgnore]
         public Section Section { get; set; }
     }
 }

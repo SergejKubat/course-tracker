@@ -1,5 +1,6 @@
 using System.Linq;
 using course_tracker.Data;
+using course_tracker.Dtos;
 using course_tracker.Models;
 
 namespace course_tracker.Repositories
@@ -30,6 +31,28 @@ namespace course_tracker.Repositories
         public User GetById(int id)
         {
             return _context.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public User Update(int id, UserDto dto)
+        {
+            var newUser = this.GetById(id);
+
+            newUser.FirstName = dto.FirstName;
+            newUser.LastName = dto.LastName;
+            newUser.Avatar = dto.Avatar;
+            newUser.Description = dto.Description;
+
+            _context.SaveChanges();
+
+            return newUser;
+        }
+
+        public void Delete(int id)
+        {
+            var user = this.GetById(id);
+
+            _context.Users.Remove(user);
+            _context.SaveChanges();
         }
 
     }

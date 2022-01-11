@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using course_tracker.Data;
+using course_tracker.Dtos;
 using course_tracker.Models;
 
 namespace course_tracker.Repositories
@@ -26,6 +27,17 @@ namespace course_tracker.Repositories
         public Section GetById(int id)
         {
             return _context.Sections.FirstOrDefault(s => s.Id == id);
+        }
+
+        public Section Update(int id, SectionDto dto)
+        {
+            var newSection = this.GetById(id);
+
+            newSection.Name = dto.Name;
+
+            _context.SaveChanges();
+
+            return newSection;
         }
 
         public void Delete(int id)
