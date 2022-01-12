@@ -1,8 +1,9 @@
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Mono', monospace;
     font-weight: 400;
     line-height: 1.7;
-    color: $color-black;
+    color: $color-white;
+    background-color: $color-background;
 }
 
 h1 {
