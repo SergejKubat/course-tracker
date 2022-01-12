@@ -1,0 +1,72 @@
+.header {
+    padding: 1rem 0;
+    font-size: 1.6rem;
+    box-shadow: 0 0.3rem 2rem rgba(117, 117, 117, 0.08);
+
+    &-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &-side {
+        display: flex;
+        align-items: center;
+    }
+
+    &-logo {
+        margin-right: 1.6rem;
+        font-size: 2.4rem;
+        font-weight: 700;
+
+        & span {
+            color: $color-primary;
+        }
+    }
+
+    &-drop {
+        position: relative;
+        margin-right: 1.6rem;
+        padding: 1rem 0;
+
+        &-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            display: none;
+            min-width: 25rem;
+            padding: 0.5rem 0.7rem;
+            background-color: $color-white;
+            list-style-type: none;
+            z-index: 2;
+        }
+
+        &-item {
+            font-size: 1.4rem;
+
+            & a {
+                color: #2f2f2f;
+            }
+
+            &:hover {
+                background-color: $color-primary;
+
+                & a {
+                    color: $color-white;
+                }
+            }
+        }
+    }
+
+    &-drop:hover &-drop-menu {
+        display: block;
+    }
+
+    &-link {
+        color: $color-link;
+
+        &:hover {
+            color: $color-white;
+        }
+    }
+}
