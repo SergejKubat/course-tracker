@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Container } from 'react-bootstrap';
 
-import Button from 'components/Form/Button';
+import CourseItemList from 'components/Course/List';
 
 const HomePage = () => {
     return (
@@ -13,11 +13,14 @@ const HomePage = () => {
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Aut alias necessitatibus quibusdam vitae eligendi excepturi
                     provident non consequatur amet laudantium officia, cumque ullam ad iusto nulla corporis! Eligendi, tenetur saepe.
                 </p>
-                <h2 className="text-center" style={{ marginTop: '7rem' }}>
-                    Latest Courses
-                </h2>
-                <p className="mt-4 text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, rem?</p>
-                <Button text="Some text" />
+                <CourseItemList
+                    heading="Popular Courses"
+                    description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti, rem?"
+                />
+                <CourseItemList
+                    heading="Latest Courses"
+                    description="Quo inventore tenetur autem possimus reiciendis quibusdam ipsa porro dignissimos maxime quod corporis."
+                />
             </Container>
         </main>
     );

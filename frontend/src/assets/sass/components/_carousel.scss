@@ -1,0 +1,23 @@
+.carousel {
+    &-container {
+        margin-top: 7rem;
+    }
+
+    &-item-padding-right {
+        padding-right: 1.5rem;
+    }
+}
+
+.react-multiple-carousel__arrow {
+    border-radius: unset;
+    min-width: 5rem;
+    min-height: 100%;
+
+    &--right {
+        right: 0;
+    }
+
+    &--left {
+        left: 0;
+    }
+}
