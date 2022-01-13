@@ -1,0 +1,12 @@
+.login {
+    &-form {
+        display: flex;
+        flex-direction: column;
+        max-width: 45rem;
+        margin: 3rem auto;
+
+        & button {
+            align-self: flex-end;
+        }
+    }
+}

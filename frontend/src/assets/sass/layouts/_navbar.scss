@@ -1,27 +1,19 @@
 .header {
-    padding: 1rem 0;
     font-size: 1.6rem;
     box-shadow: 0 0.3rem 2rem rgba(117, 117, 117, 0.08);
 
-    &-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    &-side {
-        display: flex;
-        align-items: center;
-    }
-
     &-logo {
-        margin-right: 1.6rem;
         font-size: 2.4rem;
         font-weight: 700;
+        color: $color-white;
 
         & span {
             color: $color-primary;
         }
+    }
+
+    &-item {
+        padding: 0 1rem;
     }
 
     &-drop {
@@ -69,4 +61,21 @@
             color: $color-white;
         }
     }
+
+    &-btn {
+        padding: 0.8rem 1.2rem;
+        color: $color-white;
+        background-color: $color-primary;
+        border-radius: 5px;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            color: $color-white;
+            background-color: darken($color-primary, 5%);
+        }
+    }
+}
+
+.navbar-toggler {
+    font-size: 2rem;
 }

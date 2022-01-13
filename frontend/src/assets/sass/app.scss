@@ -9,4 +9,11 @@
 @import 'base/base';
 @import 'base/typography';
 
+@import 'components/button';
+@import 'components/form';
+@import 'components/input';
+
+@import 'layouts/footer';
 @import 'layouts/navbar';
+
+@import 'pages/login';

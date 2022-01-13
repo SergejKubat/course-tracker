@@ -1,49 +1,66 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 
-const Navbar = () => {
+const Navigation = () => {
     return (
-        <header className="header">
-            <Container className="header-container">
-                <div className="header-side">
-                    <div className="header-logo">
-                        Course<span>Tracker</span>
-                    </div>
-                    <div className="header-drop">
-                        <Link to="/categories" className="header-link">
-                            CATEGORIES
-                        </Link>
-                        <ul className="header-drop-menu">
-                            <li className="header-drop-item">
-                                <Link to="/categories/1">Category 1</Link>
-                            </li>
-                            <li className="header-drop-item">
-                                <Link to="/categories/2">Category 2</Link>
-                            </li>
-                            <li className="header-drop-item">
-                                <Link to="/categories/3">Category 3</Link>
-                            </li>
-                            <li className="header-drop-item">
-                                <Link to="/categories/4">Category 4</Link>
-                            </li>
-                            <li className="header-drop-item">
-                                <Link to="/categories/5">Category 5</Link>
-                            </li>
-                        </ul>
-                    </div>
-                    <Link to="/authors" className="header-link">
-                        AUTHORS
-                    </Link>
-                </div>
-                <div className="header-side">
-                    <Link to="/registration">SIGN UP</Link>
-                    <Link to="/login">SIGN IN</Link>
-                </div>
+        <Navbar id="navbar" expand="lg" variant="dark" className="header">
+            <Container>
+                <Navbar.Brand>
+                    <NavLink to="/">
+                        <div className="header-logo">
+                            Course<span>Tracker</span>
+                        </div>
+                    </NavLink>
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Collapse id="basic-navbar-nav">
+                    <Nav className="ms-auto align-items-center">
+                        <div className="header-item">
+                            <NavLink to="/authors" className="header-link">
+                                AUTHORS
+                            </NavLink>
+                        </div>
+                        <div className="header-item">
+                            <div className="header-drop">
+                                <NavLink to="/categories" className="header-link">
+                                    CATEGORIES
+                                </NavLink>
+                                <ul className="header-drop-menu">
+                                    <li className="header-drop-item">
+                                        <NavLink to="/categories/1">Category 1</NavLink>
+                                    </li>
+                                    <li className="header-drop-item">
+                                        <NavLink to="/categories/2">Category 2</NavLink>
+                                    </li>
+                                    <li className="header-drop-item">
+                                        <NavLink to="/categories/3">Category 3</NavLink>
+                                    </li>
+                                    <li className="header-drop-item">
+                                        <NavLink to="/categories/4">Category 4</NavLink>
+                                    </li>
+                                    <li className="header-drop-item">
+                                        <NavLink to="/categories/5">Category 5</NavLink>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="header-item">
+                            <NavLink to="/registration" className="header-btn">
+                                SIGN UP
+                            </NavLink>
+                        </div>
+                        <div className="header-item">
+                            <NavLink to="/login" className="header-link">
+                                SIGN IN
+                            </NavLink>
+                        </div>
+                    </Nav>
+                </Navbar.Collapse>
             </Container>
-        </header>
+        </Navbar>
     );
 };
 
-export default Navbar;
+export default Navigation;
