@@ -6,14 +6,14 @@ const responsive = {
     },
     desktop: {
         breakpoint: { max: 3000, min: 1024 },
-        items: 5,
-        slidesToSlide: 5,
-        partialVisibilityGutter: 20
+        items: 4,
+        slidesToSlide: 4,
+        partialVisibilityGutter: 30
     },
     laptop: {
         breakpoint: { max: 1024, min: 768 },
-        items: 4,
-        slidesToSlide: 4,
+        items: 3,
+        slidesToSlide: 3,
         partialVisibilityGutter: 40
     },
     tablet: {

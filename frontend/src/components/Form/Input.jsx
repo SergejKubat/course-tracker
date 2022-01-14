@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Input = ({ name, type, required, minLength, maxLength, defaultValue, placeholder, onValueChange, style }) => {
+const Input = ({ name, type, required, minLength, maxLength, defaultValue, placeholder, icon, onValueChange, style }) => {
     const [value, setValue] = useState(defaultValue);
 
     const onChange = (e) => {
@@ -15,7 +15,7 @@ const Input = ({ name, type, required, minLength, maxLength, defaultValue, place
     }, [defaultValue]);
 
     return (
-        <div className="form-group">
+        <div className="form-group" style={style}>
             <input
                 name={name}
                 type={type || 'text'}
@@ -25,9 +25,9 @@ const Input = ({ name, type, required, minLength, maxLength, defaultValue, place
                 value={value || ''}
                 placeholder={placeholder}
                 onChange={onChange}
-                className="form-control"
-                style={style}
+                className={`form-control ${icon ? 'icon' : ''}`}
             />
+            {icon}
         </div>
     );
 };

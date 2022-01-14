@@ -11,7 +11,7 @@ const CourseItemList = ({ heading, description }) => {
     return (
         <section className="section">
             <h2 className="text-center">{heading}</h2>
-            <p className="mt-4 mb-5 text-center">{description}</p>
+            <p className="mt-4 mb-0 text-center">{description}</p>
             <Carousel
                 responsive={responsive}
                 partialVisible={true}

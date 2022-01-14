@@ -1,0 +1,38 @@
+.author-item {
+    margin-top: 3rem;
+
+    &-img {
+        height: 15rem;
+        width: auto;
+        border-radius: 50%;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &-name {
+        margin-top: 0.8rem;
+    }
+
+    &-profession {
+        font-size: 1.4rem;
+        color: #6a6f73;
+    }
+
+    &-data {
+        display: flex;
+        align-items: center;
+        margin: 0.5rem 0;
+
+        & .icon {
+            margin-right: 1rem;
+            font-size: 1.8rem;
+        }
+
+        & .text {
+            font-size: 1.4rem;
+        }
+    }
+}
