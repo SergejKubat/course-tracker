@@ -1,0 +1,45 @@
+.course {
+    &-author {
+        display: flex;
+        align-items: center;
+        margin: 2rem 0;
+
+        &-img {
+            height: 3rem;
+            width: 3rem;
+            margin-right: 0.7rem;
+            border-radius: 50%;
+        }
+
+        &-name {
+            font-size: 1.4rem;
+        }
+    }
+
+    &-data {
+        display: flex;
+        align-items: center;
+        margin: 1rem 0;
+
+        & .icon {
+            margin-right: 0.7rem;
+            font-size: 1.8rem;
+        }
+
+        & .text {
+            font-size: 1.4rem;
+        }
+    }
+
+    &-lection {
+        margin: 0.5rem 0;
+
+        & .icon {
+            margin-right: 1rem;
+        }
+
+        & .name {
+            font-size: 1.4rem;
+        }
+    }
+}
