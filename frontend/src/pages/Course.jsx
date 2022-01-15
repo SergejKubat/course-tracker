@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
 import Collapsible from 'react-collapsible';
+import ReactPlayer from 'react-player';
 import { MdOutlineUpdate, MdLanguage } from 'react-icons/md';
 import { BsFillPeopleFill, BsFillCollectionFill } from 'react-icons/bs';
 import { AiFillPlayCircle } from 'react-icons/ai';
@@ -11,7 +12,9 @@ import { FaLock } from 'react-icons/fa';
 
 import AuthorImage from 'assets/img/author.jpg';
 import CourseItemList from 'components/Course/List';
-import ReviewItem from 'components/Review/Item';
+import ReviewItemList from 'components/Review/List';
+
+import Image from 'assets/img/slika.jpg';
 
 const CoursePage = () => {
     const { id } = useParams();
@@ -23,43 +26,56 @@ const CoursePage = () => {
     return (
         <div style={{ marginTop: '20vh' }}>
             <Container>
-                <h1 className="mb-4">Complete Python Bootcamp</h1>
-                <Link to="/users/1">
-                    <div className="course-author">
-                        <img src={AuthorImage} alt="Author" className="course-author-img" />
-                        <span className="course-author-name" style={{ color: '#6a6f73' }}>
-                            Jose Portilla
-                        </span>
-                    </div>
-                </Link>
-                <div className="course-item-rating">
-                    <span className="average" style={{ fontSize: '1.8rem' }}>
-                        4.5
-                    </span>
-                    <StarRatings
-                        rating={4.5}
-                        starRatedColor="#e59819"
-                        starEmptyColor="#6c757d"
-                        starDimension="20px"
-                        starSpacing="2px"
-                        numberOfStars={5}
-                    />
-                    <span className="count" style={{ fontSize: '1.6rem' }}>
-                        (123 Ratings)
-                    </span>
-                </div>
-                <div className="course-data">
-                    <BsFillPeopleFill className="icon" />
-                    <span className="text">154 Students</span>
-                </div>
-                <div className="course-data">
-                    <MdOutlineUpdate className="icon" />
-                    <span className="text">Last updated: 19 December 2021</span>
-                </div>
-                <div className="course-data">
-                    <MdLanguage className="icon" />
-                    <span className="text">Language: English</span>
-                </div>
+                <Row>
+                    <Col xs={12} md={6} className="course-details">
+                        <h1 className="mb-4">Complete Python Bootcamp</h1>
+                        <Link to="/users/1">
+                            <div className="course-author">
+                                <img src={AuthorImage} alt="Author" className="course-author-img" />
+                                <span className="course-author-name" style={{ color: '#6a6f73' }}>
+                                    Jose Portilla
+                                </span>
+                            </div>
+                        </Link>
+                        <div className="course-item-rating">
+                            <span className="average" style={{ fontSize: '1.8rem' }}>
+                                4.5
+                            </span>
+                            <StarRatings
+                                rating={4.5}
+                                starRatedColor="#e59819"
+                                starEmptyColor="#6c757d"
+                                starDimension="20px"
+                                starSpacing="2px"
+                                numberOfStars={5}
+                            />
+                            <span className="count" style={{ fontSize: '1.6rem' }}>
+                                (123 Ratings)
+                            </span>
+                        </div>
+                        <div className="course-data">
+                            <BsFillPeopleFill className="icon" />
+                            <span className="text">154 Students</span>
+                        </div>
+                        <div className="course-data">
+                            <MdOutlineUpdate className="icon" />
+                            <span className="text">Last updated: 19 December 2021</span>
+                        </div>
+                        <div className="course-data">
+                            <MdLanguage className="icon" />
+                            <span className="text">Language: English</span>
+                        </div>
+                    </Col>
+                    <Col xs={12} md={6} className="course-video">
+                        <ReactPlayer
+                            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+                            height="20rem"
+                            width="35rem"
+                            controls={true}
+                            light={Image}
+                        />
+                    </Col>
+                </Row>
                 <h3 className="my-5">Description</h3>
                 <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis assumenda iure nesciunt deserunt fuga consequatur
@@ -115,7 +131,7 @@ const CoursePage = () => {
                         </div>
                     </Collapsible>
                 </div>
-                <ReviewItem />
+                <ReviewItemList />
                 <CourseItemList
                     heading="Related Courses"
                     description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, omnis."

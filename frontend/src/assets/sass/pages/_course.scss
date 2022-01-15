@@ -31,6 +31,24 @@
         }
     }
 
+    &-details {
+        @include respond(mobileL) {
+            justify-content: center;
+            order: 2;
+        }
+    }
+
+    &-video {
+        display: flex;
+        justify-content: flex-end;
+
+        @include respond(mobileL) {
+            justify-content: center;
+            order: 1;
+            margin-bottom: 3rem;
+        }
+    }
+
     &-lection {
         margin: 0.5rem 0;
 

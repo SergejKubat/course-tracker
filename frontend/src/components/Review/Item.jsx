@@ -10,12 +10,12 @@ const ReviewItem = () => {
     return (
         <div className="review-item">
             <Row>
-                <Col xs={2} md={2}>
+                <Col xs={12} md={1}>
                     <Link to="/users/1">
                         <img src={AuthorImage} alt="Author 1" className="review-item-img" />
                     </Link>
                 </Col>
-                <Col xs={10} md={10}>
+                <Col xs={12} md={11}>
                     <h3>Author Name</h3>
                     <div className="review-item-rating">
                         <StarRatings
@@ -26,9 +26,9 @@ const ReviewItem = () => {
                             starSpacing="2px"
                             numberOfStars={5}
                         />
-                        <span>a week ago</span>
+                        <span className="date">a week ago</span>
                     </div>
-                    <p>
+                    <p className="review-item-description">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam nisi nam obcaecati sapiente maxime blanditiis
                         repellendus facere fuga necessitatibus nihil!
                     </p>
