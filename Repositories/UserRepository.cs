@@ -40,6 +40,7 @@ namespace course_tracker.Repositories
             newUser.FirstName = dto.FirstName;
             newUser.LastName = dto.LastName;
             newUser.Avatar = dto.Avatar;
+            newUser.Profession = dto.Proffesion;
             newUser.Description = dto.Description;
 
             _context.SaveChanges();

@@ -56,6 +56,7 @@ namespace course_tracker
                 .AllowCredentials()
             );
 
+            app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

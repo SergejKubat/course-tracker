@@ -20,6 +20,8 @@ namespace course_tracker.Models
         [Required]
         [MaxLength(200)]
         public string Avatar { get; set; }
+        [MaxLength(100)]
+        public string Profession { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         [Required]

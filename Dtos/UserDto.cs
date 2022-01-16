@@ -5,6 +5,7 @@ namespace course_tracker.Dtos
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Avatar { get; set; }
+        public string Proffesion { get; set; }
         public string Description { get; set; }
     }
 }

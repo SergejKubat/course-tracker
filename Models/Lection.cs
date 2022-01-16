@@ -15,6 +15,7 @@ namespace course_tracker.Models
         [Required]
         [MaxLength(200)]
         public string Video { get; set; }
+        public bool Public { get; set; }
 
         public int SectionId { get; set; }
         [JsonIgnore]

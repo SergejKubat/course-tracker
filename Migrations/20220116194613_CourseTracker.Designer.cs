@@ -10,8 +10,8 @@ using course_tracker.Data;
 namespace course_tracker.Migrations
 {
     [DbContext(typeof(CourseTrackerContext))]
-    [Migration("20211231141651_CreateSchema")]
-    partial class CreateSchema
+    [Migration("20220116194613_CourseTracker")]
+    partial class CourseTracker
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -112,6 +112,9 @@ namespace course_tracker.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
+
+                    b.Property<bool>("Public")
+                        .HasColumnType("boolean");
 
                     b.Property<int>("SectionId")
                         .HasColumnType("integer");
@@ -265,6 +268,10 @@ namespace course_tracker.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Profession")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");

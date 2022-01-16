@@ -1,22 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useParams, Link } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
 import Collapsible from 'react-collapsible';
-import ReactPlayer from 'react-player';
 import { MdOutlineUpdate, MdLanguage } from 'react-icons/md';
-import { BsFillPeopleFill, BsFillCollectionFill } from 'react-icons/bs';
+import { BsFillPeopleFill, BsFillCollectionFill, BsPlayCircle } from 'react-icons/bs';
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { FaLock } from 'react-icons/fa';
 
 import AuthorImage from 'assets/img/author.jpg';
 import CourseItemList from 'components/Course/List';
 import ReviewItemList from 'components/Review/List';
+import ModalVideo from 'components/Modal/Video';
 
 import Image from 'assets/img/slika.jpg';
 
 const CoursePage = () => {
+    const [modalShow, setModalShow] = useState(false);
+
     const { id } = useParams();
 
     useEffect(() => {
@@ -67,13 +69,10 @@ const CoursePage = () => {
                         </div>
                     </Col>
                     <Col xs={12} md={6} className="course-video">
-                        <ReactPlayer
-                            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
-                            height="20rem"
-                            width="35rem"
-                            controls={true}
-                            light={Image}
-                        />
+                        <div className="course-video-preview" onClick={() => setModalShow(true)}>
+                            <img src={Image} alt="Course name" className="image" />
+                            <BsPlayCircle className="icon" />
+                        </div>
                     </Col>
                 </Row>
                 <h3 className="my-5">Description</h3>
@@ -135,6 +134,13 @@ const CoursePage = () => {
                 <CourseItemList
                     heading="Related Courses"
                     description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, omnis."
+                />
+                <ModalVideo
+                    show={modalShow}
+                    onHide={() => setModalShow(false)}
+                    title="Course Preview"
+                    name="Complete Python Bootcamp"
+                    video="https://www.youtube.com/watch?v=ysz5S6PUM-U"
                 />
             </Container>
         </div>

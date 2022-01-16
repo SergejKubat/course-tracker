@@ -36,6 +36,7 @@ namespace course_tracker.Repositories
             newLection.Name = dto.Name;
             newLection.Description = dto.Description;
             newLection.Video = dto.Video;
+            newLection.Public = dto.Public;
 
             _context.SaveChanges();
 

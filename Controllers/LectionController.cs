@@ -61,6 +61,7 @@ namespace course_tracker.Controllers
                     Name = dto.Name,
                     Description = dto.Description,
                     Video = dto.Video,
+                    Public = dto.Public,
                     SectionId = section.Id
                 };
 

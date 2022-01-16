@@ -1,0 +1,9 @@
+.modal {
+    &-content {
+        background-color: darken($color-background, 10%);
+    }
+
+    &-body {
+        padding: 1.5rem;
+    }
+}

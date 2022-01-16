@@ -111,6 +111,9 @@ namespace course_tracker.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
+                    b.Property<bool>("Public")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("SectionId")
                         .HasColumnType("integer");
 
@@ -263,6 +266,10 @@ namespace course_tracker.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("character varying(200)");
+
+                    b.Property<string>("Profession")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
 
                     b.Property<int>("RoleId")
                         .HasColumnType("integer");
