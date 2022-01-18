@@ -1,39 +1,52 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
 
-import AuthorImage from 'assets/img/author.jpg';
+import { timeSince } from 'helpers/time';
 
-const ReviewItem = () => {
+const ReviewItem = ({ review }) => {
+    const [author, setAuthor] = useState();
+
+    useEffect(() => {
+        axios
+            .get(`http://localhost:5000/api/users/${review.userId}`)
+            .then((response) => {
+                setAuthor(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <div className="review-item">
-            <Row>
-                <Col xs={12} md={1}>
-                    <Link to="/users/1">
-                        <img src={AuthorImage} alt="Author 1" className="review-item-img" />
-                    </Link>
-                </Col>
-                <Col xs={12} md={11}>
-                    <h3>Author Name</h3>
-                    <div className="review-item-rating">
-                        <StarRatings
-                            rating={4}
-                            starRatedColor="#e59819"
-                            starEmptyColor="#6c757d"
-                            starDimension="18px"
-                            starSpacing="2px"
-                            numberOfStars={5}
-                        />
-                        <span className="date">a week ago</span>
-                    </div>
-                    <p className="review-item-description">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam nisi nam obcaecati sapiente maxime blanditiis
-                        repellendus facere fuga necessitatibus nihil!
-                    </p>
-                </Col>
-            </Row>
+            {author && (
+                <Row>
+                    <Col xs={12} md={1}>
+                        <Link to="/users/1">
+                            <img src={author.avatar} alt={`${author.firstName} ${author.lastName}`} className="review-item-img" />
+                        </Link>
+                    </Col>
+                    <Col xs={12} md={11}>
+                        <h3>{`${author.firstName} ${author.lastName}`}</h3>
+                        <div className="review-item-rating">
+                            <StarRatings
+                                rating={review.rating}
+                                starRatedColor="#e59819"
+                                starEmptyColor="#6c757d"
+                                starDimension="18px"
+                                starSpacing="2px"
+                                numberOfStars={5}
+                            />
+                            <span className="date">{timeSince(new Date(review.dateCreated))}</span>
+                        </div>
+                        <p className="review-item-description">{review.comment}</p>
+                    </Col>
+                </Row>
+            )}
         </div>
     );
 };

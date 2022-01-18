@@ -33,6 +33,17 @@ namespace course_tracker.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        public IActionResult GetUsers([FromQuery(Name = "roleId")] string roleId)
+        {
+            if (roleId != null)
+            {
+                return Ok(_repository.GetByRoleId(int.Parse(roleId)));
+            }
+
+            return Ok(new { message = "No users found" });
+        }
+
         [HttpPut("{id?}")]
         public IActionResult UpdateUser(int id, UserDto dto)
         {
@@ -80,7 +91,7 @@ namespace course_tracker.Controllers
                 }
 
                 _repository.Delete(existingUser.Id);
-                
+
                 return Ok(new { message = "User deleted successfully" });
             }
             catch (Exception e)

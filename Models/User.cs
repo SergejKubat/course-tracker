@@ -36,7 +36,7 @@ namespace course_tracker.Models
         public Role Role { get; set; }
 
         public List<Course> Courses { get; set; } = new List<Course>();
-
+        [JsonIgnore]
         public List<Review> Reviews { get; set; } = new List<Review>();
 
         public List<PurchaseRecord> PurchaseRecords { get; set; } = new List<PurchaseRecord>();

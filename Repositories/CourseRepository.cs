@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using course_tracker.Data;
 using course_tracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace course_tracker.Repositories
 {
@@ -25,7 +26,7 @@ namespace course_tracker.Repositories
 
         public Course GetById(int id)
         {
-            return _context.Courses.FirstOrDefault(c => c.Id == id);
+            return _context.Courses.Include(c => c.Reviews).Include(c => c.PurchaseRecords).FirstOrDefault(c => c.Id == id);
         }
 
         public Course GetByName(string name)
@@ -35,12 +36,12 @@ namespace course_tracker.Repositories
 
         public List<Course> GetAllByUserId(int id)
         {
-            return _context.Courses.Where(c => c.UserId == id).ToList();
+            return _context.Courses.Include(c => c.Reviews).Include(c => c.PurchaseRecords).Where(c => c.UserId == id).ToList();
         }
 
         public List<Course> GetAllByCategoryId(int id)
         {
-            return _context.Courses.Where(c => c.CategoryId == id).ToList();
+            return _context.Courses.Include(c => c.Reviews).Include(c => c.PurchaseRecords).Where(c => c.CategoryId == id).ToList();
         }
 
         public List<Course> GetAllByName(string name)

@@ -3,6 +3,7 @@ using System.Linq;
 using course_tracker.Data;
 using course_tracker.Dtos;
 using course_tracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace course_tracker.Repositories
 {
@@ -50,7 +51,7 @@ namespace course_tracker.Repositories
 
         public List<Section> GetByCourseId(int id)
         {
-            return _context.Sections.Where(s => s.CourseId == id).ToList();
+            return _context.Sections.Include(s => s.Lections).Where(s => s.CourseId == id).ToList();
         }
     }
 }

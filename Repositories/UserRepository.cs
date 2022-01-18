@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using course_tracker.Data;
 using course_tracker.Dtos;
@@ -31,6 +32,11 @@ namespace course_tracker.Repositories
         public User GetById(int id)
         {
             return _context.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public List<User> GetByRoleId(int id)
+        {
+            return _context.Users.Where(u => u.RoleId == id).ToList();
         }
 
         public User Update(int id, UserDto dto)
