@@ -7,6 +7,7 @@ import { FaSearch } from 'react-icons/fa';
 
 import CourseItem from 'components/Course/Item';
 import Input from 'components/Form/Input';
+import Spinner from 'components/Spinner';
 
 const CategoryPage = () => {
     const [category, setCategory] = useState();
@@ -46,7 +47,7 @@ const CategoryPage = () => {
 
     return (
         <div style={{ marginTop: '20vh' }}>
-            {category && (
+            {category ? (
                 <Container>
                     <div className="text-center">
                         <h1>
@@ -81,6 +82,8 @@ const CategoryPage = () => {
                         </div>
                     )}
                 </Container>
+            ) : (
+                <Spinner />
             )}
         </div>
     );

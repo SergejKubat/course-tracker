@@ -1,9 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
+import axios from 'axios';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
 
 const Navigation = () => {
+    const [categories, setCategories] = useState();
+
+    useEffect(() => {
+        axios
+            .get('http://localhost:5000/api/categories')
+            .then((response) => {
+                setCategories(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <Navbar id="navbar" expand="lg" variant="dark" className="header">
             <Container>
@@ -27,23 +41,15 @@ const Navigation = () => {
                                 <NavLink to="/categories" className="header-link">
                                     CATEGORIES
                                 </NavLink>
-                                <ul className="header-drop-menu">
-                                    <li className="header-drop-item">
-                                        <NavLink to="/categories/1">Category 1</NavLink>
-                                    </li>
-                                    <li className="header-drop-item">
-                                        <NavLink to="/categories/2">Category 2</NavLink>
-                                    </li>
-                                    <li className="header-drop-item">
-                                        <NavLink to="/categories/3">Category 3</NavLink>
-                                    </li>
-                                    <li className="header-drop-item">
-                                        <NavLink to="/categories/4">Category 4</NavLink>
-                                    </li>
-                                    <li className="header-drop-item">
-                                        <NavLink to="/categories/5">Category 5</NavLink>
-                                    </li>
-                                </ul>
+                                {categories && (
+                                    <ul className="header-drop-menu">
+                                        {categories.map((category) => (
+                                            <li key={category.id} className="header-drop-item">
+                                                <NavLink to={`/categories/${category.id}`}>{category.name}</NavLink>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
                         </div>
                         <div className="header-item">

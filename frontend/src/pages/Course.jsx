@@ -8,10 +8,12 @@ import { MdOutlineUpdate, MdLanguage } from 'react-icons/md';
 import { BsFillPeopleFill, BsPlayCircle } from 'react-icons/bs';
 import { ImPriceTag } from 'react-icons/im';
 
+import Button from 'components/Form/Button';
 import SectionList from 'components/Section/List';
-//import CourseItemList from 'components/Course/List';
+import CourseItemList from 'components/Course/List';
 import ReviewItemList from 'components/Review/List';
 import ModalVideo from 'components/Modal/Video';
+import Spinner from 'components/Spinner';
 
 import { convertDateToString } from 'helpers/date';
 
@@ -20,6 +22,7 @@ const CoursePage = () => {
     const [author, setAuthor] = useState();
     const [category, setCategory] = useState();
     const [sections, setSections] = useState();
+    const [relatedCourses, setRelatedCourses] = useState();
     const [modalShow, setModalShow] = useState(false);
 
     const { id } = useParams();
@@ -56,21 +59,34 @@ const CoursePage = () => {
                     .catch((error) => {
                         console.log(error);
                     });
+
+                axios
+                    .get(`http://localhost:5000/api/courses?categoryId=${response.data.categoryId}`)
+                    .then((response) => {
+                        setRelatedCourses(response.data.filter((course) => course.id != id));
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
             })
             .catch((error) => {
                 console.log(error);
             });
     }, [id]);
 
+    const buyCourse = () => {
+        console.log('Course bought!');
+    };
+
     return (
         <div style={{ marginTop: '20vh' }}>
-            {course && (
+            {course ? (
                 <Container>
                     <Row>
                         <Col xs={12} md={6} className="course-details">
-                            {category && <p>{category.name}</p>}
+                            {category ? <p>{category.name}</p> : <Spinner />}
                             <h1 className="mb-4">{course.name}</h1>
-                            {author && (
+                            {author ? (
                                 <Link to={`/users/${author.id}`}>
                                     <div className="course-author">
                                         <img
@@ -83,6 +99,8 @@ const CoursePage = () => {
                                         </span>
                                     </div>
                                 </Link>
+                            ) : (
+                                <Spinner />
                             )}
                             <div className="course-item-rating">
                                 <span className="average" style={{ fontSize: '1.8rem' }}>
@@ -116,6 +134,7 @@ const CoursePage = () => {
                                 <ImPriceTag className="icon" />
                                 <span className="text">{course.price} $</span>
                             </div>
+                            <Button text="Buy Course" onClick={buyCourse} />
                         </Col>
                         <Col xs={12} md={6} className="course-video">
                             <div className="course-video-preview" onClick={() => setModalShow(true)}>
@@ -136,11 +155,18 @@ const CoursePage = () => {
                     <h3 className="my-5">Course Content</h3>
                     {sections && <SectionList sections={sections} />}
                     <ReviewItemList reviews={course.reviews} />
-                    {/*<CourseItemList
-                        heading="Related Courses"
-                        description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, omnis."
-                    />*/}
+                    {relatedCourses ? (
+                        <CourseItemList
+                            heading="Related Courses"
+                            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam, omnis."
+                            courses={relatedCourses}
+                        />
+                    ) : (
+                        <Spinner />
+                    )}
                 </Container>
+            ) : (
+                <Spinner />
             )}
         </div>
     );

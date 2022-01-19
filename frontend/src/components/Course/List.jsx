@@ -7,7 +7,7 @@ import CourseItem from './Item';
 
 import { responsive } from 'data/carousel';
 
-const CourseItemList = ({ heading, description }) => {
+const CourseItemList = ({ heading, description, courses }) => {
     return (
         <section className="section">
             <h2 className="text-center">{heading}</h2>
@@ -18,16 +18,9 @@ const CourseItemList = ({ heading, description }) => {
                 removeArrowOnDeviceType={['tablet', 'mobile']}
                 containerClass="carousel-container"
                 itemClass="carousel-item-padding-right">
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
-                <CourseItem />
+                {courses.map((course) => (
+                    <CourseItem key={course.id} course={course} />
+                ))}
             </Carousel>
         </section>
     );

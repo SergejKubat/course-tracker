@@ -9,6 +9,7 @@ namespace course_tracker.Repositories
         Course Create(Course course);
         Course GetById(int id);
         Course GetByName(string name);
+        List<Course> GetAll();
         List<Course> GetAllByUserId(int id);
         List<Course> GetAllByCategoryId(int id);
         List<Course> GetAllByName(String name);

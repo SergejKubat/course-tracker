@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using course_tracker.Dtos;
 using course_tracker.Helpers;
 using course_tracker.Models;
@@ -112,6 +113,18 @@ namespace course_tracker.Controllers
             }
 
             return Ok(new { message = "No courses found" });
+        }
+
+        [HttpGet("latest")]
+        public IActionResult GetLatestCourses()
+        {
+            return Ok(_repository.GetAll().OrderByDescending(c => c.LastUpdated));
+        }
+
+        [HttpGet("popular")]
+        public IActionResult GetPopularCourses()
+        {
+            return Ok(_repository.GetAll().OrderByDescending(c => c.PurchaseRecords.Count));
         }
     }
 }

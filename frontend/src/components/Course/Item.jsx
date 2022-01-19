@@ -22,7 +22,7 @@ const CourseItem = ({ course }) => {
         <div className="course-item">
             {author && (
                 <div>
-                    <Link to="/courses/1">
+                    <Link to={`/courses/${course.id}`}>
                         <img src={course.image} alt="Course 1" className="course-item-img" />
                     </Link>
                     <h3 className="course-item-name">{course.name}</h3>

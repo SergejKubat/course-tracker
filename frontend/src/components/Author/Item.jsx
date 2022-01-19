@@ -32,7 +32,7 @@ const AuthorItem = ({ author }) => {
 
     return (
         <div className="author-item">
-            <Link to="/users/1">
+            <Link to={`/users/${author.id}`}>
                 <img src={author.avatar} alt={`${author.firstName} ${author.lastName}`} className="author-item-img" />
             </Link>
             <h3 className="author-item-name">

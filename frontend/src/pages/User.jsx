@@ -8,6 +8,7 @@ import { MdReviews } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
 import CourseItem from 'components/Course/Item';
+import Spinner from 'components/Spinner';
 
 const UserPage = () => {
     const [user, setUser] = useState();
@@ -47,7 +48,7 @@ const UserPage = () => {
 
     return (
         <div style={{ marginTop: '20vh' }}>
-            {user && (
+            {user ? (
                 <Container>
                     <Row>
                         <Col xs={12} md={6}>
@@ -55,7 +56,7 @@ const UserPage = () => {
                                 {user.firstName} {user.lastName}
                             </h1>
                             <p className="my-3">{user.proffesion}</p>
-                            {courses && (
+                            {courses && user.roleId === 2 && (
                                 <div className="mt-5">
                                     <div className="author-item-data">
                                         <AiFillStar className="icon" />
@@ -91,7 +92,7 @@ const UserPage = () => {
                     </Row>
                     <h3 className="mt-5">About Me</h3>
                     <p className="mt-5">{user.description}</p>
-                    {courses && (
+                    {courses && user.roleId === 2 ? (
                         <div>
                             <h3 className="my-5">Courses ({courses.length})</h3>
                             <Row>
@@ -102,8 +103,12 @@ const UserPage = () => {
                                 ))}
                             </Row>
                         </div>
+                    ) : (
+                        <Spinner />
                     )}
                 </Container>
+            ) : (
+                <Spinner />
             )}
         </div>
     );
