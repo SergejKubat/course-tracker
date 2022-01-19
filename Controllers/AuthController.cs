@@ -37,7 +37,7 @@ namespace course_tracker.Controllers
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                Avatar = "avatar.jpg",
+                Avatar = "http://localhost:5000/img/user.jpg",
                 DateCreated = DateTime.Now,
                 Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
                 Enabled = true,

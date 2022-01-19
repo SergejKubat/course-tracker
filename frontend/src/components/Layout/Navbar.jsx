@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav } from 'react-bootstrap';
+
+import { UserContext } from 'context/UserContext';
 
 const Navigation = () => {
     const [categories, setCategories] = useState();
+
+    const { user, setUser } = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios
@@ -17,6 +23,18 @@ const Navigation = () => {
                 console.log(error);
             });
     }, []);
+
+    const logOut = () => {
+        axios
+            .post('http://localhost:5000/api/logout', null, { withCredentials: true })
+            .then((response) => {
+                setUser(null);
+                navigate('/');
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <Navbar id="navbar" expand="lg" variant="dark" className="header">
@@ -62,6 +80,20 @@ const Navigation = () => {
                                 SIGN IN
                             </NavLink>
                         </div>
+                        {user && (
+                            <div className="d-flex align-items-center">
+                                <div className="header-item">
+                                    <NavLink to="/user" className="header-link">
+                                        <img src={user.avatar} alt={`${user.firstName} ${user.lastName}`} className="img" />
+                                    </NavLink>
+                                </div>
+                                <div className="header-item">
+                                    <p className="header-link" style={{ marginBottom: 0, cursor: 'pointer' }} onClick={logOut}>
+                                        LOG OUT
+                                    </p>
+                                </div>
+                            </div>
+                        )}
                     </Nav>
                 </Navbar.Collapse>
             </Container>

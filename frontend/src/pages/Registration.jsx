@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
+import axios from 'axios';
 import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Input from 'components/Form/Input';
 import Button from 'components/Form/Button';
+import Notification from 'components/Notification';
+import Spinner from 'components/Spinner';
 
 const RegistrationPage = () => {
     const [firstName, setFirstName] = useState('');
@@ -12,16 +15,37 @@ const RegistrationPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const navigate = useNavigate();
 
     const registration = (e) => {
         e.preventDefault();
 
         if (password !== confirmPassword) {
-            console.log('error');
+            setError("Password and repeated password didn't match.");
             return;
         }
 
-        console.log('registration');
+        setLoading(true);
+
+        axios
+            .post('http://localhost:5000/api/register', {
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                password: password
+            })
+            .then((response) => {
+                navigate('/login');
+            })
+            .catch((error) => {
+                setError(error.response.data.message);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (
@@ -63,6 +87,8 @@ const RegistrationPage = () => {
                     </p>
                     <Button text="Sign Up" type="info" />
                 </form>
+                {error && <Notification type="danger" text={error} onClose={() => setError('')} />}
+                {loading && <Spinner />}
             </Container>
         </div>
     );

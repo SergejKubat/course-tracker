@@ -35,7 +35,7 @@
         }
 
         &-item {
-            padding: 0 .5rem;
+            padding: 0 0.5rem;
             font-size: 1.4rem;
 
             & a {
@@ -61,6 +61,13 @@
 
         &:hover {
             color: $color-white;
+        }
+
+        & .img {
+            height: 3rem;
+            width: 3rem;
+            margin-right: 0.5rem;
+            border-radius: 50%;
         }
     }
 

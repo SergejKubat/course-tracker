@@ -1,19 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
+import axios from 'axios';
 import { Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import Input from 'components/Form/Input';
 import Button from 'components/Form/Button';
+import Notification from 'components/Notification';
+import Spinner from 'components/Spinner';
+
+import { UserContext } from 'context/UserContext';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const { user, setUser } = useContext(UserContext);
 
     const login = (e) => {
         e.preventDefault();
 
-        console.log(`email: ${email}, password: ${password}`);
+        setLoading(true);
+
+        axios
+            .post(
+                'http://localhost:5000/api/login',
+                {
+                    email: email,
+                    password: password
+                },
+                { withCredentials: true }
+            )
+            .then((response) => {
+                console.log(response.data);
+
+                axios
+                    .get('http://localhost:5000/api/user', { withCredentials: true })
+                    .then((response) => {
+                        setUser(response.data);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            })
+            .catch((error) => {
+                setError(error.response.data.message);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
     };
 
     return (
@@ -36,6 +73,8 @@ const LoginPage = () => {
                     </p>
                     <Button text="Sign In" type="info" />
                 </form>
+                {error && <Notification type="danger" text={error} />}
+                {loading && <Spinner />}
             </Container>
         </div>
     );
