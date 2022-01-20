@@ -1,0 +1,21 @@
+.badge {
+    padding: 0.25rem 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    border: none;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    background-color: #00bf9a;
+    margin-left: 0.4rem;
+
+    &.big {
+        margin-top: 1rem;
+        padding: 0.5rem 0.75rem;
+        font-size: 1.4rem;
+    }
+}

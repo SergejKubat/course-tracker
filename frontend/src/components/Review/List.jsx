@@ -14,7 +14,7 @@ const ReviewItemList = ({ reviews, callback }) => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quasi repellendus, ab asperiores animi excepturi sunt.
             </p>
             {reviews.map((review) => (
-                <ReviewItem key={review.id} review={review} isAuthor={review.userId === user.id} callback={callback} />
+                <ReviewItem key={review.id} review={review} isAuthor={user && review.userId === user.id} callback={callback} />
             ))}
         </section>
     );

@@ -96,7 +96,7 @@ const Purchase = () => {
                         </Col>
                         <Col xs={12} md={6}>
                             <h3 className="mb-5">Credit/Debit Card</h3>
-                            <form onSubmit={purchaseCourse}>
+                            <form autoComplete="off" onSubmit={purchaseCourse}>
                                 <Input name="name" placeholder="Name on Card" required />
                                 <Input name="card-number" placeholder="Card Number" required />
                                 <Row>

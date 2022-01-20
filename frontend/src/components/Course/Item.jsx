@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
 
+import Badge from 'components/Badge';
+
+import { UserContext } from 'context/UserContext';
+
 const CourseItem = ({ course }) => {
     const [author, setAuthor] = useState();
+
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         axios
@@ -44,6 +50,9 @@ const CourseItem = ({ course }) => {
                         <span className="count">({course.reviews.length})</span>
                     </div>
                     <p className="course-item-price">{course.price} $</p>
+                    {user && user.purchaseRecords.filter((purchaseRecord) => purchaseRecord.courseId === course.id).length > 0 && (
+                        <Badge text="Purchased" />
+                    )}
                 </div>
             )}
         </div>

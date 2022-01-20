@@ -55,7 +55,7 @@ const RegistrationPage = () => {
                 <p className="my-3">
                     Dicta beatae necessitatibus odit fugit natus, dolorum aperiam nobis maxime qui corporis voluptatem eos ut ipsa repellat.
                 </p>
-                <form className="login-form" onSubmit={registration}>
+                <form autoComplete="off" className="login-form" onSubmit={registration}>
                     <Input
                         name="firstName"
                         type="text"

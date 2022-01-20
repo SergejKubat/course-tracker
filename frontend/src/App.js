@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 
+import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/Home';
@@ -21,16 +22,20 @@ import { UserContext } from 'context/UserContext';
 import './assets/sass/app.scss';
 
 const App = () => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(window.localStorage.getItem('user') ? JSON.parse(window.localStorage.getItem('user')) : null);
 
     const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
     useEffect(() => {
-        if (window.localStorage.getItem('user')) {
-            setUser(JSON.parse(window.localStorage.getItem('user')));
-        } else {
-            setUser(null);
-        }
+        axios
+            .get('http://localhost:5000/api/user', { withCredentials: true })
+            .then((response) => {
+                setUser(response.data);
+                window.localStorage.setItem('user', JSON.stringify(response.data));
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
 
     return (
@@ -42,11 +47,11 @@ const App = () => {
                     <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/user" />} />
                     <Route path="/registration" element={!user ? <RegistrationPage /> : <Navigate to="/user" />} />
                     <Route path="/authors" element={<AuthorsPage />} />
-                    <Route path="/user" element={user ? <AuthUser /> : <Navigate to="/" />} />
+                    <Route path="/user" element={user ? <AuthUser /> : <Navigate to="/login" />} />
                     <Route path="/users/:id" element={<UserPage />} />
                     <Route path="/courses/:id" element={<CoursePage />} />
                     <Route path="/categories/:id" element={<CategoryPage />} />
-                    <Route path="/purchase/:id" element={user ? <Purchase /> : <Navigate to="/" />} />
+                    <Route path="/purchase/:id" element={user ? <Purchase /> : <Navigate to="/login" />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />

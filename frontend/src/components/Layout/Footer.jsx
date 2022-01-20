@@ -41,7 +41,7 @@ const Footer = () => {
                         </div>
                         <p>Stay Updated with our latest news. We promise not to spam</p>
                         <div className="footer-form-group">
-                            <form className="footer-form">
+                            <form autoComplete="off" className="footer-form">
                                 <Input name="email" type="email" placeholder="Your Email" required={true} />
                             </form>
                         </div>

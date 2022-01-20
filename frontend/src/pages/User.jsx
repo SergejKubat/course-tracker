@@ -24,14 +24,16 @@ const UserPage = () => {
             .then((response) => {
                 setUser(response.data);
 
-                axios
-                    .get(`http://localhost:5000/api/courses?userId=${id}`)
-                    .then((response) => {
-                        setCourses(response.data);
-                    })
-                    .catch((error) => {
-                        console.log(error);
-                    });
+                if (response.data.roleId === 2) {
+                    axios
+                        .get(`http://localhost:5000/api/courses?userId=${id}`)
+                        .then((response) => {
+                            setCourses(response.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -47,7 +49,9 @@ const UserPage = () => {
                             <h1>
                                 {user.firstName} {user.lastName}
                             </h1>
-                            <p className="my-3">{user.proffesion}</p>
+                            <p className="my-3">
+                                <b>Profession:</b> {user.proffesion || 'Not Specified'}
+                            </p>
                             {courses && user.roleId === 2 && (
                                 <div className="mt-5">
                                     <div className="author-item-data">
@@ -82,21 +86,25 @@ const UserPage = () => {
                             />
                         </Col>
                     </Row>
-                    <h3 className="mt-5">About Me</h3>
+                    <h2 className="mt-5">About Me</h2>
                     <p className="mt-5">{user.description}</p>
-                    {courses && user.roleId === 2 ? (
-                        <div>
-                            <h3 className="my-5">Courses ({courses.length})</h3>
-                            <Row>
-                                {courses.map((course) => (
-                                    <Col key={course.id} xs={12} md={3}>
-                                        <CourseItem course={course} />
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
+                    {user.roleId === 2 ? (
+                        courses ? (
+                            <div>
+                                <h3 className="my-5">Courses ({courses.length})</h3>
+                                <Row>
+                                    {courses.map((course) => (
+                                        <Col key={course.id} xs={12} md={3}>
+                                            <CourseItem course={course} />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </div>
+                        ) : (
+                            <Spinner />
+                        )
                     ) : (
-                        <Spinner />
+                        <div></div>
                     )}
                 </Container>
             ) : (

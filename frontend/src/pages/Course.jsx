@@ -9,6 +9,7 @@ import { BsFillPeopleFill, BsPlayCircle } from 'react-icons/bs';
 import { ImPriceTag } from 'react-icons/im';
 
 import Button from 'components/Form/Button';
+import Badge from 'components/Badge';
 import SectionList from 'components/Section/List';
 import CourseItemList from 'components/Course/List';
 import ReviewItemList from 'components/Review/List';
@@ -147,11 +148,13 @@ const CoursePage = () => {
                                 <span className="text">{course.price} $</span>
                             </div>
                             {!user ||
-                                (user.purchaseRecords.filter((purchaseRecord) => purchaseRecord.courseId === course.id).length === 0 && (
-                                    <Link to={`/purchase/${course.id}`}>
-                                        <Button text="Buy Course" />
-                                    </Link>
-                                ))}
+                            user.purchaseRecords.filter((purchaseRecord) => purchaseRecord.courseId === course.id).length === 0 ? (
+                                <Link to={`/purchase/${course.id}`}>
+                                    <Button text="Buy Course" />
+                                </Link>
+                            ) : (
+                                <Badge type="big" text="Purchased" />
+                            )}
                         </Col>
                         <Col xs={12} md={6} className="course-video">
                             <div className="course-video-preview" onClick={() => setModalShow(true)}>

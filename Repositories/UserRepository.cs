@@ -46,9 +46,19 @@ namespace course_tracker.Repositories
 
             newUser.FirstName = dto.FirstName;
             newUser.LastName = dto.LastName;
-            newUser.Avatar = dto.Avatar;
-            newUser.Profession = dto.Proffesion;
+            newUser.Profession = dto.Profession;
             newUser.Description = dto.Description;
+
+            _context.SaveChanges();
+
+            return newUser;
+        }
+
+        public User UpdateAvatar(int id, string avatar)
+        {
+            var newUser = this.GetById(id);
+
+            newUser.Avatar = avatar;
 
             _context.SaveChanges();
 

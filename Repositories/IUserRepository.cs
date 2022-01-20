@@ -11,6 +11,7 @@ namespace course_tracker.Repositories
         User GetById(int id);
         List<User> GetByRoleId(int id);
         User Update(int id, UserDto dto);
+        User UpdateAvatar(int id, string avatar);
         void Delete(int id);
     }
 }

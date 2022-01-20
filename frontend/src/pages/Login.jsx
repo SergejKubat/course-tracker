@@ -62,7 +62,7 @@ const LoginPage = () => {
             <Container className="text-center">
                 <h1>SIGN IN</h1>
                 <p className="my-3">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-                <form className="login-form" onSubmit={login}>
+                <form autoComplete="off" className="login-form" onSubmit={login}>
                     <Input name="email" type="email" value={email} onValueChange={setEmail} placeholder="Your Email" required />
                     <Input
                         name="password"
