@@ -2,6 +2,8 @@ import React from 'react';
 
 import ReviewItem from './Item';
 
+import CreateReview from './Create';
+
 const ReviewItemList = ({ reviews }) => {
     return (
         <section className="section">
@@ -12,6 +14,7 @@ const ReviewItemList = ({ reviews }) => {
             {reviews.map((review) => (
                 <ReviewItem key={review.id} review={review} />
             ))}
+            <CreateReview />
         </section>
     );
 };

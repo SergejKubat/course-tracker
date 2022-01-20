@@ -11,6 +11,11 @@
         outline: none;
         transition: all 0.3s ease-in-out;
 
+        &.textarea {
+            height: 15rem;
+            resize: none;
+        }
+
         &:focus {
             color: $color-white;
             background-color: transparent;

@@ -29,6 +29,7 @@ const Navigation = () => {
             .post('http://localhost:5000/api/logout', null, { withCredentials: true })
             .then((response) => {
                 setUser(null);
+                window.localStorage.removeItem('user');
                 navigate('/');
             })
             .catch((error) => {

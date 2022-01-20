@@ -1,10 +1,11 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import HomePage from './pages/Home';
 import LoginPage from './pages/Login';
 import RegistrationPage from './pages/Registration';
+import AuthUser from 'pages/AuthUser';
 import AuthorsPage from 'pages/Authors';
 import UserPage from 'pages/User';
 import CoursePage from 'pages/Course';
@@ -23,6 +24,14 @@ const App = () => {
 
     const value = useMemo(() => ({ user, setUser }), [user, setUser]);
 
+    useEffect(() => {
+        if (window.localStorage.getItem('user')) {
+            setUser(JSON.parse(window.localStorage.getItem('user')));
+        } else {
+            setUser(null);
+        }
+    }, []);
+
     return (
         <Router>
             <UserContext.Provider value={value}>
@@ -32,6 +41,7 @@ const App = () => {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/registration" element={<RegistrationPage />} />
                     <Route path="/authors" element={<AuthorsPage />} />
+                    <Route path="/user" element={user ? <AuthUser /> : <Navigate to="/" />} />
                     <Route path="/users/:id" element={<UserPage />} />
                     <Route path="/courses/:id" element={<CoursePage />} />
                     <Route path="/categories/:id" element={<CategoryPage />} />

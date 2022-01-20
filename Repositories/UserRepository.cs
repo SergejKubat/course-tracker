@@ -3,6 +3,7 @@ using System.Linq;
 using course_tracker.Data;
 using course_tracker.Dtos;
 using course_tracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace course_tracker.Repositories
 {
@@ -31,7 +32,7 @@ namespace course_tracker.Repositories
 
         public User GetById(int id)
         {
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return _context.Users.Include(u => u.PurchaseRecords).Include(u => u.Courses).FirstOrDefault(u => u.Id == id);
         }
 
         public List<User> GetByRoleId(int id)

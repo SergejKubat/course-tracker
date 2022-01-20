@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
@@ -15,6 +15,8 @@ import ReviewItemList from 'components/Review/List';
 import ModalVideo from 'components/Modal/Video';
 import Spinner from 'components/Spinner';
 
+import { UserContext } from 'context/UserContext';
+
 import { convertDateToString } from 'helpers/date';
 
 const CoursePage = () => {
@@ -26,6 +28,8 @@ const CoursePage = () => {
     const [modalShow, setModalShow] = useState(false);
 
     const { id } = useParams();
+
+    const { user } = useContext(UserContext);
 
     useEffect(() => {
         axios
@@ -134,7 +138,10 @@ const CoursePage = () => {
                                 <ImPriceTag className="icon" />
                                 <span className="text">{course.price} $</span>
                             </div>
-                            <Button text="Buy Course" onClick={buyCourse} />
+                            {!user ||
+                                (user.purchaseRecords.filter((purchaseRecord) => purchaseRecord.courseId === course.id).length === 0 && (
+                                    <Button text="Buy Course" onClick={buyCourse} />
+                                ))}
                         </Col>
                         <Col xs={12} md={6} className="course-video">
                             <div className="course-video-preview" onClick={() => setModalShow(true)}>

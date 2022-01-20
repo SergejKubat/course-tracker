@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 
 import axios from 'axios';
 import { Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import Input from 'components/Form/Input';
 import Button from 'components/Form/Button';
@@ -18,6 +18,8 @@ const LoginPage = () => {
     const [loading, setLoading] = useState(false);
 
     const { user, setUser } = useContext(UserContext);
+
+    const navigate = useNavigate();
 
     const login = (e) => {
         e.preventDefault();
@@ -40,6 +42,8 @@ const LoginPage = () => {
                     .get('http://localhost:5000/api/user', { withCredentials: true })
                     .then((response) => {
                         setUser(response.data);
+                        window.localStorage.setItem('user', JSON.stringify(response.data));
+                        navigate('/user');
                     })
                     .catch((error) => {
                         console.log(error);
@@ -73,7 +77,7 @@ const LoginPage = () => {
                     </p>
                     <Button text="Sign In" type="info" />
                 </form>
-                {error && <Notification type="danger" text={error} />}
+                {error && <Notification type="danger" text={error} onClose={() => setError('')} />}
                 {loading && <Spinner />}
             </Container>
         </div>

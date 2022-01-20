@@ -26,12 +26,14 @@ const ReviewItem = ({ review }) => {
             {author && (
                 <Row>
                     <Col xs={12} md={1}>
-                        <Link to="/users/1">
+                        <Link to={`/users/${author.id}`}>
                             <img src={author.avatar} alt={`${author.firstName} ${author.lastName}`} className="review-item-img" />
                         </Link>
                     </Col>
                     <Col xs={12} md={11}>
-                        <h3>{`${author.firstName} ${author.lastName}`}</h3>
+                        <h3>
+                            <Link to={`/users/${author.id}`} style={{ color: '#fff' }}>{`${author.firstName} ${author.lastName}`}</Link>
+                        </h3>
                         <div className="review-item-rating">
                             <StarRatings
                                 rating={review.rating}
