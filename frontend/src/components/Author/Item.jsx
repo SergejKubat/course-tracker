@@ -6,6 +6,8 @@ import { AiFillStar, AiFillPlayCircle } from 'react-icons/ai';
 import { MdReviews } from 'react-icons/md';
 import { BsFillPeopleFill } from 'react-icons/bs';
 
+import { calcAverageRating } from 'helpers/rating';
+
 const AuthorItem = ({ author }) => {
     const [courses, setCourses] = useState();
 
@@ -19,16 +21,6 @@ const AuthorItem = ({ author }) => {
                 console.log(error);
             });
     }, []);
-
-    const calcAverageRating = (courses) => {
-        const numberOfReviews = courses.reduce((acc, course) => acc + course.reviews.length, 0);
-        let sumOfReviews = 0;
-        for (let i = 0; i < courses.length; i++) {
-            sumOfReviews += courses[0].reviews.reduce((acc, review) => acc + review.rating, 0);
-        }
-
-        return sumOfReviews / numberOfReviews;
-    };
 
     return (
         <div className="author-item">

@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import ReviewItem from './Item';
 
-import CreateReview from './Create';
+import { UserContext } from 'context/UserContext';
 
-const ReviewItemList = ({ reviews }) => {
+const ReviewItemList = ({ reviews, callback }) => {
+    const { user } = useContext(UserContext);
+
     return (
         <section className="section">
             <h2>Reviews</h2>
@@ -12,9 +14,8 @@ const ReviewItemList = ({ reviews }) => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quasi repellendus, ab asperiores animi excepturi sunt.
             </p>
             {reviews.map((review) => (
-                <ReviewItem key={review.id} review={review} />
+                <ReviewItem key={review.id} review={review} isAuthor={review.userId === user.id} callback={callback} />
             ))}
-            <CreateReview />
         </section>
     );
 };

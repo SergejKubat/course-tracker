@@ -71,16 +71,20 @@ const Navigation = () => {
                                 )}
                             </div>
                         </div>
-                        <div className="header-item">
-                            <NavLink to="/registration" className="header-btn">
-                                SIGN UP
-                            </NavLink>
-                        </div>
-                        <div className="header-item">
-                            <NavLink to="/login" className="header-link">
-                                SIGN IN
-                            </NavLink>
-                        </div>
+                        {!user && (
+                            <React.Fragment>
+                                <div className="header-item">
+                                    <NavLink to="/registration" className="header-btn">
+                                        SIGN UP
+                                    </NavLink>
+                                </div>
+                                <div className="header-item">
+                                    <NavLink to="/login" className="header-link">
+                                        SIGN IN
+                                    </NavLink>
+                                </div>
+                            </React.Fragment>
+                        )}
                         {user && (
                             <div className="d-flex align-items-center">
                                 <div className="header-item">

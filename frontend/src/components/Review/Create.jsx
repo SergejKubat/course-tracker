@@ -7,7 +7,7 @@ import Textarea from 'components/Form/Textarea';
 import Button from 'components/Form/Button';
 import Notification from 'components/Notification';
 
-const CreateReview = () => {
+const CreateReview = ({ courseId, callback }) => {
     const [rating, setRating] = useState(1);
     const [comment, setComment] = useState('');
     const [error, setError] = useState('');
@@ -19,7 +19,7 @@ const CreateReview = () => {
     const createRating = () => {
         axios
             .post(
-                `http://localhost:5000/api/courses/1/reviews`,
+                `http://localhost:5000/api/courses/${courseId}/reviews`,
                 {
                     comment: comment,
                     rating: rating
@@ -28,6 +28,7 @@ const CreateReview = () => {
             )
             .then((response) => {
                 console.log(response.data);
+                callback();
             })
             .catch((error) => {
                 setError(error.response.data.message);
@@ -56,7 +57,7 @@ const CreateReview = () => {
                 onValueChange={setComment}
                 style={{ marginTop: '2rem' }}
             />
-            <Button type="info" text="Create" onClick={createRating} style={{ marginBottom: '2rem' }} />
+            <Button type="info" text="Add Review" onClick={createRating} style={{ marginBottom: '2rem' }} />
             {error && <Notification type="danger" text={error} onClose={() => setError('')} />}
         </div>
     );

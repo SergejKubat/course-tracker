@@ -10,6 +10,8 @@ import { BsFillPeopleFill } from 'react-icons/bs';
 import CourseItem from 'components/Course/Item';
 import Spinner from 'components/Spinner';
 
+import { calcAverageRating } from 'helpers/rating';
+
 const UserPage = () => {
     const [user, setUser] = useState();
     const [courses, setCourses] = useState();
@@ -35,16 +37,6 @@ const UserPage = () => {
                 console.log(error);
             });
     }, [id]);
-
-    const calcAverageRating = (courses) => {
-        const numberOfReviews = courses.reduce((acc, course) => acc + course.reviews.length, 0);
-        let sumOfReviews = 0;
-        for (let i = 0; i < courses.length; i++) {
-            sumOfReviews += courses[0].reviews.reduce((acc, review) => acc + review.rating, 0);
-        }
-
-        return sumOfReviews / numberOfReviews;
-    };
 
     return (
         <div style={{ marginTop: '20vh' }}>

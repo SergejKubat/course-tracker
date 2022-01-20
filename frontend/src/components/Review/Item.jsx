@@ -5,9 +5,11 @@ import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 import StarRatings from 'react-star-ratings';
 
+import Button from 'components/Form/Button';
+
 import { timeSince } from 'helpers/time';
 
-const ReviewItem = ({ review }) => {
+const ReviewItem = ({ review, isAuthor, callback }) => {
     const [author, setAuthor] = useState();
 
     useEffect(() => {
@@ -20,6 +22,17 @@ const ReviewItem = ({ review }) => {
                 console.log(error);
             });
     }, []);
+
+    const deleteReview = () => {
+        axios
+            .delete(`http://localhost:5000/api/reviews/${review.id}`, { withCredentials: true })
+            .then((response) => {
+                callback();
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <div className="review-item">
@@ -46,6 +59,7 @@ const ReviewItem = ({ review }) => {
                             <span className="date">{timeSince(new Date(review.dateCreated))}</span>
                         </div>
                         <p className="review-item-description">{review.comment}</p>
+                        {isAuthor && <Button type="danger" text="Delete" onClick={deleteReview} />}
                     </Col>
                 </Row>
             )}

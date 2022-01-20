@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using course_tracker.Dtos;
 using course_tracker.Helpers;
 using course_tracker.Repositories;
@@ -38,7 +39,7 @@ namespace course_tracker.Controllers
         {
             if (roleId != null)
             {
-                return Ok(_repository.GetByRoleId(int.Parse(roleId)));
+                return Ok(_repository.GetByRoleId(int.Parse(roleId)).OrderByDescending(u => u.PurchaseRecords.Count));
             }
 
             return Ok(new { message = "No users found" });

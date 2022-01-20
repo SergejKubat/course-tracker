@@ -10,6 +10,7 @@ import AuthorsPage from 'pages/Authors';
 import UserPage from 'pages/User';
 import CoursePage from 'pages/Course';
 import CategoryPage from 'pages/Category';
+import Purchase from 'pages/Purchase';
 import NotFound from 'pages/NotFound';
 
 import Navbar from 'components/Layout/Navbar';
@@ -38,13 +39,14 @@ const App = () => {
                 <Navbar />
                 <Routes>
                     <Route path="/" exact element={<HomePage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/registration" element={<RegistrationPage />} />
+                    <Route path="/login" element={!user ? <LoginPage /> : <Navigate to="/user" />} />
+                    <Route path="/registration" element={!user ? <RegistrationPage /> : <Navigate to="/user" />} />
                     <Route path="/authors" element={<AuthorsPage />} />
                     <Route path="/user" element={user ? <AuthUser /> : <Navigate to="/" />} />
                     <Route path="/users/:id" element={<UserPage />} />
                     <Route path="/courses/:id" element={<CoursePage />} />
                     <Route path="/categories/:id" element={<CategoryPage />} />
+                    <Route path="/purchase/:id" element={user ? <Purchase /> : <Navigate to="/" />} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
                 <Footer />

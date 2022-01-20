@@ -13,6 +13,7 @@ import SectionList from 'components/Section/List';
 import CourseItemList from 'components/Course/List';
 import ReviewItemList from 'components/Review/List';
 import ModalVideo from 'components/Modal/Video';
+import CreateReview from 'components/Review/Create';
 import Spinner from 'components/Spinner';
 
 import { UserContext } from 'context/UserContext';
@@ -67,7 +68,7 @@ const CoursePage = () => {
                 axios
                     .get(`http://localhost:5000/api/courses?categoryId=${response.data.categoryId}`)
                     .then((response) => {
-                        setRelatedCourses(response.data.filter((course) => course.id != id));
+                        setRelatedCourses(response.data.filter((course) => course.id !== Number(id)));
                     })
                     .catch((error) => {
                         console.log(error);
@@ -78,8 +79,15 @@ const CoursePage = () => {
             });
     }, [id]);
 
-    const buyCourse = () => {
-        console.log('Course bought!');
+    const updateCourse = () => {
+        axios
+            .get(`http://localhost:5000/api/courses/${id}`)
+            .then((response) => {
+                setCourse(response.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     return (
@@ -108,7 +116,7 @@ const CoursePage = () => {
                             )}
                             <div className="course-item-rating">
                                 <span className="average" style={{ fontSize: '1.8rem' }}>
-                                    {course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length}
+                                    {(course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length).toFixed(2)}
                                 </span>
                                 <StarRatings
                                     rating={course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length}
@@ -140,7 +148,9 @@ const CoursePage = () => {
                             </div>
                             {!user ||
                                 (user.purchaseRecords.filter((purchaseRecord) => purchaseRecord.courseId === course.id).length === 0 && (
-                                    <Button text="Buy Course" onClick={buyCourse} />
+                                    <Link to={`/purchase/${course.id}`}>
+                                        <Button text="Buy Course" />
+                                    </Link>
                                 ))}
                         </Col>
                         <Col xs={12} md={6} className="course-video">
@@ -157,11 +167,16 @@ const CoursePage = () => {
                             video={course.video}
                         />
                     </Row>
-                    <h3 className="my-5">Description</h3>
+                    <h2 className="my-5">Description</h2>
                     <p>{course.description}</p>
-                    <h3 className="my-5">Course Content</h3>
+                    <h2 className="my-5">Course Content</h2>
                     {sections && <SectionList sections={sections} />}
-                    <ReviewItemList reviews={course.reviews} />
+                    <ReviewItemList reviews={course.reviews} callback={updateCourse} />
+                    {user &&
+                        user.purchaseRecords.filter((purchaseRecord) => purchaseRecord.courseId === course.id).length > 0 &&
+                        course.reviews.filter((review) => review.userId === user.id).length === 0 && (
+                            <CreateReview courseId={course.id} callback={updateCourse} />
+                        )}
                     {relatedCourses ? (
                         <CourseItemList
                             heading="Related Courses"

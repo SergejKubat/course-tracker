@@ -42,6 +42,7 @@ const AuthUser = () => {
                 <p>
                     <b>Description:</b> {user.description}
                 </p>
+                
             </Container>
         </div>
     );

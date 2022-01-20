@@ -31,7 +31,7 @@ const CourseItem = ({ course }) => {
                     </p>
                     <div className="course-item-rating">
                         <span className="average">
-                            {course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length}
+                            {(course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length).toFixed(2)}
                         </span>
                         <StarRatings
                             rating={course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length}
