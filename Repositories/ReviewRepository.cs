@@ -4,7 +4,6 @@ using System.Linq;
 using course_tracker.Data;
 using course_tracker.Dtos;
 using course_tracker.Models;
-using Microsoft.EntityFrameworkCore;
 
 namespace course_tracker.Repositories
 {

@@ -32,7 +32,7 @@ namespace course_tracker.Repositories
 
         public User GetById(int id)
         {
-            return _context.Users.Include(u => u.PurchaseRecords).Include(u => u.Courses).FirstOrDefault(u => u.Id == id);
+            return _context.Users.Include(u => u.PurchaseRecords).Include(u => u.Courses).AsSplitQuery().FirstOrDefault(u => u.Id == id);
         }
 
         public List<User> GetByRoleId(int id)

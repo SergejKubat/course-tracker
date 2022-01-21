@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using course_tracker.Data;
 using course_tracker.Repositories;
 using course_tracker.Helpers;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace course_tracker
 {
@@ -24,7 +25,11 @@ namespace course_tracker
         {
             services.AddCors();
 
-            services.AddDbContext<CourseTrackerContext>(options => options.UseNpgsql(Configuration.GetConnectionString("Default")));
+            services.AddDbContext<CourseTrackerContext>(options =>
+            {
+                options.UseNpgsql(Configuration.GetConnectionString("Default"));
+                options.ConfigureWarnings(w => w.Ignore(CoreEventId.RowLimitingOperationWithoutOrderByWarning));
+                });
 
             services.AddControllers();
 

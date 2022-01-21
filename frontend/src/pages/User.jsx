@@ -56,7 +56,7 @@ const UserPage = () => {
                                 <div className="mt-5">
                                     <div className="author-item-data">
                                         <AiFillStar className="icon" />
-                                        <span className="text">{calcAverageRating(courses)} Author Rating</span>
+                                        <span className="text">{courses.length ? calcAverageRating(courses) : 0} Author Rating</span>
                                     </div>
                                     <div className="author-item-data">
                                         <MdReviews className="icon" />

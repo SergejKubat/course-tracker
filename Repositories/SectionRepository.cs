@@ -51,7 +51,7 @@ namespace course_tracker.Repositories
 
         public List<Section> GetByCourseId(int id)
         {
-            return _context.Sections.Include(s => s.Lections).Where(s => s.CourseId == id).ToList();
+            return _context.Sections.Include(s => s.Lections).AsSplitQuery().Where(s => s.CourseId == id).ToList();
         }
     }
 }

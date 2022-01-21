@@ -117,10 +117,18 @@ const CoursePage = () => {
                             )}
                             <div className="course-item-rating">
                                 <span className="average" style={{ fontSize: '1.8rem' }}>
-                                    {(course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length).toFixed(2)}
+                                    {course.reviews.length
+                                        ? (course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length).toFixed(
+                                              2
+                                          )
+                                        : 0}
                                 </span>
                                 <StarRatings
-                                    rating={course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length}
+                                    rating={
+                                        course.reviews.length
+                                            ? course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length
+                                            : 0
+                                    }
                                     starRatedColor="#e59819"
                                     starEmptyColor="#6c757d"
                                     starDimension="20px"

@@ -13,9 +13,13 @@ const ReviewItemList = ({ reviews, callback }) => {
             <p className="mt-4 mb-5">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod quasi repellendus, ab asperiores animi excepturi sunt.
             </p>
-            {reviews.map((review) => (
-                <ReviewItem key={review.id} review={review} isAuthor={user && review.userId === user.id} callback={callback} />
-            ))}
+            {reviews.length ? (
+                reviews.map((review) => (
+                    <ReviewItem key={review.id} review={review} isAuthor={user && review.userId === user.id} callback={callback} />
+                ))
+            ) : (
+                <p className="text-center">No reviews yet.</p>
+            )}
         </section>
     );
 };

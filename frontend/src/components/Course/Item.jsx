@@ -22,7 +22,7 @@ const CourseItem = ({ course }) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [course.userId]);
 
     return (
         <div className="course-item">
@@ -37,10 +37,16 @@ const CourseItem = ({ course }) => {
                     </p>
                     <div className="course-item-rating">
                         <span className="average">
-                            {(course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length).toFixed(2)}
+                            {course.reviews.length
+                                ? (course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length).toFixed(2)
+                                : 0}
                         </span>
                         <StarRatings
-                            rating={course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length}
+                            rating={
+                                course.reviews.length
+                                    ? course.reviews.reduce((acc, review) => acc + review.rating, 0) / course.reviews.length
+                                    : 0
+                            }
                             starRatedColor="#e59819"
                             starEmptyColor="#6c757d"
                             starDimension="16px"

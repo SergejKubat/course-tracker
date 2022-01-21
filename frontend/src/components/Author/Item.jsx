@@ -20,7 +20,7 @@ const AuthorItem = ({ author }) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [author.id]);
 
     return (
         <div className="author-item">
@@ -35,15 +35,19 @@ const AuthorItem = ({ author }) => {
                 <div>
                     <div className="author-item-data">
                         <AiFillStar className="icon" />
-                        <span className="text">{calcAverageRating(courses)} Author Rating</span>
+                        <span className="text">{courses.length ? calcAverageRating(courses) : 0} Author Rating</span>
                     </div>
                     <div className="author-item-data">
                         <MdReviews className="icon" />
-                        <span className="text">{courses.reduce((acc, course) => acc + course.reviews.length, 0)} Reviews</span>
+                        <span className="text">
+                            {courses.length ? courses.reduce((acc, course) => acc + course.reviews.length, 0) : 0} Reviews
+                        </span>
                     </div>
                     <div className="author-item-data">
                         <BsFillPeopleFill className="icon" />
-                        <span className="text">{courses.reduce((acc, course) => acc + course.purchaseRecords.length, 0)} Students</span>
+                        <span className="text">
+                            {courses.length ? courses.reduce((acc, course) => acc + course.purchaseRecords.length, 0) : 0} Students
+                        </span>
                     </div>
                     <div className="author-item-data">
                         <AiFillPlayCircle className="icon" />

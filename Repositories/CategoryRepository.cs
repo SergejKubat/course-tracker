@@ -25,7 +25,7 @@ namespace course_tracker.Repositories
 
         public Category GetById(int id)
         {
-            return _context.Categories.Include(c => c.Courses).FirstOrDefault(c => c.Id == id);
+            return _context.Categories.Include(c => c.Courses).AsSplitQuery().FirstOrDefault(c => c.Id == id);
         }
 
         public List<Category> GetAll()
